@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>643</width>
+    <height>493</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>20</y>
+      <width>541</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Path of file:</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="yellow">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Yellow</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="red">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Red</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="green">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Green</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="blue">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Blue</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cyan">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cyan </string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="pink">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>200</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pink</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="gray">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gray</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="dyellow">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dark Yellow</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="dred">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>300</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dark Red</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="dblue">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dark Blue</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="white">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>240</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>White </string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="black">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Black</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="dpink">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dark Pink</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="dcyan">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dark Cyan</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="dgreen">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>360</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dark Green</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="dgray">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>340</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Dark Gray</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>341</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Check the coloers want to calculate</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="calculate_btn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>311</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Calculate</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>70</y>
+      <width>341</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Statistics</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="output">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>111</y>
+      <width>291</width>
+      <height>341</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>643</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>calculate_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>calculate_btn</receiver>
+   <slot>deleteLater()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>462</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>462</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
