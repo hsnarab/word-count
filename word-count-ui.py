@@ -17,9 +17,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(643, 493)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(100, 20, 541, 20))
-        self.lineEdit.setObjectName("lineEdit")
+        self.address = QtWidgets.QLineEdit(self.centralwidget)
+        self.address.setGeometry(QtCore.QRect(100, 20, 541, 20))
+        self.address.setObjectName("address")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 10, 91, 31))
         font = QtGui.QFont()
@@ -128,8 +128,11 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Check the coloers want to calculate"))
         self.calculate_btn.setText(_translate("MainWindow", "Calculate"))
         self.label_3.setText(_translate("MainWindow", "Statistics"))
+    
     def get_data(self):
         print("Worked!")
+        address = self.address.text()
+        print(address)
 
 if __name__ == "__main__":
     import sys
