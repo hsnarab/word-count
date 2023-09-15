@@ -9,7 +9,53 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import docx
+from docx.enum.text import WD_COLOR_INDEX
 
+def HighlightCounter(doc, color):
+    special_chars = ["!", "\"", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "{", "}", ":", ";", "'", "\\", "|", "~", "`", ",", "<", ".", ">", "/", "?", "،", "؛", ",", "]", "[", "«", "»", ":", "ء", "؟"]
+    words_count = 0
+    for para in doc.paragraphs:
+        for part in para.runs:
+            if part.font.highlight_color ==  color:
+                    words = part.text
+                    words_arrey = words.split(" ")
+                    if words_arrey[0] == "" or words_arrey[-1] == "":
+                        words_arrey.remove("")
+                    if words_arrey[-1] == "":
+                        words_arrey.remove("")
+                    if words_arrey != 0:
+                        for schar in special_chars:
+                            for char in words_arrey:
+                                if schar == char:
+                                    words_arrey.remove(char)
+                    if len(words_arrey) == 0:
+                        words_arrey = 0
+                    if words_arrey != 0:
+                        words_count += len(words_arrey)
+    return words_count
+
+def AllWordsCounter(doc):
+    special_chars = ["!", "\"", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "{", "}", ":", ";", "'", "\\", "|", "~", "`", ",", "<", ".", ">", "/", "?", "،", "؛", ",", "]", "[", "«", "»", ":", "ء", "؟"]
+    words_count = 0
+    for para in doc.paragraphs:
+        for part in para.runs:
+            words = part.text
+            words_arrey = words.split(" ")
+            if words_arrey[0] == "" or words_arrey[-1] == "":
+                words_arrey.remove("")
+            if words_arrey[-1] == "":
+                words_arrey.remove("")
+            if words_arrey != 0:
+                for schar in special_chars:
+                    for char in words_arrey:
+                        if schar == char:
+                            words_arrey.remove(char)
+            if len(words_arrey) == 0:
+                words_arrey = 0
+            if words_arrey != 0:
+                words_count += len(words_arrey)
+    return words_count
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -102,12 +148,12 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.calculate_btn.clicked.connect(self.get_data) # type: ignore
+        self.calculate_btn.clicked.connect(self.Counter) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Word Count"))
         self.label.setText(_translate("MainWindow", "Path of file:"))
         self.yellow.setText(_translate("MainWindow", "Yellow"))
         self.red.setText(_translate("MainWindow", "Red"))
@@ -129,11 +175,131 @@ class Ui_MainWindow(object):
         self.calculate_btn.setText(_translate("MainWindow", "Calculate"))
         self.label_3.setText(_translate("MainWindow", "Statistics"))
     
-    def get_data(self):
-        print("Worked!")
+    def Counter(self):
         address = self.address.text()
-        print(address)
+        try:
+            doc = docx.Document(address) 
+            all_words = AllWordsCounter(doc=doc)
+            other_words = all_words
+            output_string = "All words: " + str(all_words) + "\n"
+            self.output.append(output_string)
 
+            if self.yellow.isChecked():
+                color = WD_COLOR_INDEX.YELLOW
+                yellow_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Yellow highlighted words: " +  str(yellow_words) + "\nAnd it's " + str((yellow_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= yellow_words
+
+            if self.red.isChecked():
+                color = WD_COLOR_INDEX.RED
+                red_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Red highlighted words: " +  str(red_words) + "\nAnd it's " + str((red_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= red_words
+
+            if self.green.isChecked():
+                color = WD_COLOR_INDEX.BRIGHT_GREEN
+                green_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Green highlighted words: " +  str(green_words) + "\nAnd it's " + str((green_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= green_words    
+
+            if self.blue.isChecked():
+                color = WD_COLOR_INDEX.BLUE
+                blue_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Blue highlighted words: " +  str(blue_words) + "\nAnd it's " + str((blue_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= blue_words    
+
+            if self.gray.isChecked():
+                color = WD_COLOR_INDEX.GRAY_25
+                gray_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Gray highlighted words: " +  str(gray_words) + "\nAnd it's " + str((gray_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= gray_words    
+
+            if self.pink.isChecked():
+                color = WD_COLOR_INDEX.PINK
+                pink_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Pink highlighted words: " +  str(pink_words) + "\nAnd it's " + str((pink_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= pink_words    
+
+            if self.cyan.isChecked():
+                color = WD_COLOR_INDEX.TURQUOISE
+                cyan_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Cyan highlighted words: " +  str(cyan_words) + "\nAnd it's " + str((cyan_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= cyan_words    
+
+            if self.white.isChecked():
+                color = WD_COLOR_INDEX.WHITE
+                white_words = HighlightCounter(doc=doc, color=color)
+                output_string = "White highlighted words: " +  str(white_words) + "\nAnd it's " + str((white_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= white_words    
+
+            if self.black.isChecked():
+                color = WD_COLOR_INDEX.BLACK
+                black_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Black highlighted words: " +  str(black_words) + "\nAnd it's " + str((black_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= black_words    
+
+            if self.dblue.isChecked():
+                color = WD_COLOR_INDEX.DARK_BLUE
+                dblue_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Dark blue highlighted words: " +  str(dblue_words) + "\nAnd it's " + str((dblue_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= dblue_words    
+
+            if self.dred.isChecked():
+                color = WD_COLOR_INDEX.DARK_RED
+                dred_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Dark red highlighted words: " +  str(dred_words) + "\nAnd it's " + str((dred_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= dred_words    
+
+            if self.dyellow.isChecked():
+                color = WD_COLOR_INDEX.DARK_YELLOW
+                dyellow_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Dark yellow highlighted words: " +  str(dyellow_words) + "\nAnd it's " + str((dyellow_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= dyellow_words    
+
+            if self.dgray.isChecked():
+                color = WD_COLOR_INDEX.GRAY_50
+                dgray_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Dark gray highlighted words: " +  str(dgray_words) + "\nAnd it's " + str((dgray_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= dgray_words    
+
+            if self.dgreen.isChecked():
+                color = WD_COLOR_INDEX.GREEN
+                dgreen_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Dark green highlighted words: " +  str(dgreen_words) + "\nAnd it's " + str((dgreen_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= dgreen_words    
+
+            if self.dcyan.isChecked():
+                color = WD_COLOR_INDEX.TEAL
+                dcyan_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Dark cyan highlighted words: " +  str(dcyan_words) + "\nAnd it's " + str((dcyan_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= dcyan_words    
+
+            if self.dpink.isChecked():
+                color = WD_COLOR_INDEX.VIOLET
+                dpink_words = HighlightCounter(doc=doc, color=color)
+                output_string = "Dark pink highlighted words: " +  str(dpink_words) + "\nAnd it's " + str((dpink_words*100)/all_words) + "% " + "of all words!\n"
+                self.output.append(output_string)
+                other_words -= dpink_words    
+
+            output_string = "Other words: " +  str(other_words) + "\nAnd it's " + str((other_words*100)/all_words) + "% " + "of all words!\n"
+            self.output.append(output_string)
+        except:
+            self.output.append("Path of file is in incorrect\n")
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
