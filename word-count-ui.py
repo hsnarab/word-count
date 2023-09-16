@@ -11,6 +11,16 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import docx
 from docx.enum.text import WD_COLOR_INDEX
+import aspose.words as aw
+from os import mkdir, remove, rmdir
+
+def SpilitPages(doc_spilit):
+    mkdir("wordcount")
+    pageCount = doc_spilit.page_count
+    for page in range(0, pageCount):
+        extractedPage = doc_spilit.extract_pages(page, 1)
+        extractedPage.save(f"./wordcount/wordcount_page{page + 1}.docx")
+    return pageCount
 
 def HighlightCounter(doc, color):
     words = []
@@ -18,21 +28,20 @@ def HighlightCounter(doc, color):
     words_count = 0
     for paragraph in doc.paragraphs:
         highlight = ""
-        x = False
+        is_count = False
         for run in paragraph.runs:
-            if x == False and highlight != "" and highlight[-1] != " ":
+            if is_count == False and highlight != "" and highlight[-1] != " ":
                 highlight += " "
             if run.font.highlight_color ==  color:
                 highlight += run.text
-                x = True
+                is_count = True
             else:
-                x = False
+                is_count = False
         if highlight:
             words.append(highlight)
     for i in range(len(words)):
         words_arrey += words[i].split(" ")
     words_arrey = list(filter(None, words_arrey))
-    print(words_arrey)
     words_count = len(words_arrey)
     return words_count
 
@@ -48,6 +57,7 @@ def AllWordsCounter(doc):
             words.append(word)
     for i in range(len(words)):
         words_arrey += words[i].split(" ")
+    words_arrey = list(filter(None, words_arrey))
     words_count = len(words_arrey)
     return words_count
 
@@ -170,9 +180,10 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Statistics"))
     
     def Counter(self):
-        address = self.address.text()
+        self.output.append("Counting...")
         try:
-            doc = docx.Document(address) 
+            address = self.address.text()
+            doc = docx.Document(address)
             all_words = AllWordsCounter(doc=doc)
             other_words = all_words
             output_string = "All words: " + str(all_words) + "\n"
@@ -292,6 +303,131 @@ class Ui_MainWindow(object):
 
             output_string = "Other words: " +  str(other_words) + "\nAnd it's " + str((other_words*100)/all_words) + "% " + "of all words!\n"
             self.output.append(output_string)
+            doc_spilit = aw.Document(address)
+            page_count = SpilitPages(doc_spilit=doc_spilit)
+            for i in range(page_count):
+                self.output.append("-------------------------------------")
+                doc = docx.Document(f"./wordcount/wordcount_page{i + 1}.docx")
+                all_words = AllWordsCounter(doc=doc) - 10 #this is for this paragraph who make automatically with aspose.words --> "Evaluation Only. Created with Aspose.Words. Copyright 2003-2023 Aspose Pty Ltd."
+                other_words = all_words
+                output_string = f"All words in page {i + 1}: {all_words}\n"
+                self.output.append(output_string)
+
+                if self.yellow.isChecked():
+                    color = WD_COLOR_INDEX.YELLOW
+                    yellow_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Yellow highlighted words in page {i + 1}: {yellow_words}\nAnd it's {(yellow_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= yellow_words
+
+                if self.red.isChecked():
+                    color = WD_COLOR_INDEX.RED
+                    red_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Red highlighted words in page {i + 1}: {red_words}\nAnd it's {(red_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= red_words
+
+                if self.green.isChecked():
+                    color = WD_COLOR_INDEX.BRIGHT_GREEN
+                    green_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Green highlighted words in page {i + 1}: {green_words}\nAnd it's {(green_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= green_words    
+
+                if self.blue.isChecked():
+                    color = WD_COLOR_INDEX.BLUE
+                    blue_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Blue highlighted words in page {i + 1}: {blue_words}\nAnd it's {(blue_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= blue_words    
+
+                if self.gray.isChecked():
+                    color = WD_COLOR_INDEX.GRAY_25
+                    gray_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Gray highlighted words in page {i + 1}: {gray_words}\nAnd it's {(gray_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= gray_words    
+
+                if self.pink.isChecked():
+                    color = WD_COLOR_INDEX.PINK
+                    pink_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Pink highlighted words in page {i + 1}: {pink_words}\nAnd it's {(pink_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= pink_words    
+
+                if self.cyan.isChecked():
+                    color = WD_COLOR_INDEX.TURQUOISE
+                    cyan_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Cyan highlighted words in page {i + 1}: {cyan_words}\nAnd it's {(cyan_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= cyan_words    
+
+                if self.white.isChecked():
+                    color = WD_COLOR_INDEX.WHITE
+                    white_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"White highlighted words in page {i + 1}: {white_words}\nAnd it's {(white_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= white_words    
+
+                if self.black.isChecked():
+                    color = WD_COLOR_INDEX.BLACK
+                    black_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Black highlighted words in page {i + 1}: {black_words}\nAnd it's {(black_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= black_words    
+
+                if self.dblue.isChecked():
+                    color = WD_COLOR_INDEX.DARK_BLUE
+                    dblue_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Dark blue highlighted words in page {i + 1}: {dblue_words}\nAnd it's {(dblue_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= dblue_words    
+
+                if self.dred.isChecked():
+                    color = WD_COLOR_INDEX.DARK_RED
+                    dred_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Dark red highlighted words in page {i + 1}: {dred_words}\nAnd it's {(dred_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= dred_words    
+
+                if self.dyellow.isChecked():
+                    color = WD_COLOR_INDEX.DARK_YELLOW
+                    dyellow_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Dark yellow highlighted words in page {i + 1}: {dyellow_words}\nAnd it's {(dyellow_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= dyellow_words    
+
+                if self.dgray.isChecked():
+                    color = WD_COLOR_INDEX.GRAY_50
+                    dgray_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Dark gray highlighted words in page {i + 1}: {dgray_words}\nAnd it's {(dgray_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= dgray_words    
+
+                if self.dgreen.isChecked():
+                    color = WD_COLOR_INDEX.GREEN
+                    dgreen_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Dark green highlighted words in page {i + 1}: {dgreen_words}\nAnd it's {(dgreen_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= dgreen_words    
+
+                if self.dcyan.isChecked():
+                    color = WD_COLOR_INDEX.TEAL
+                    dcyan_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Dark cyan highlighted words in page {i + 1}: {dcyan_words}\nAnd it's {(dcyan_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= dcyan_words    
+
+                if self.dpink.isChecked():
+                    color = WD_COLOR_INDEX.VIOLET
+                    dpink_words = HighlightCounter(doc=doc, color=color) 
+                    output_string = f"Dark pink highlighted words in page {i + 1}: {dpink_words}\nAnd it's {(dpink_words*100)/all_words}% of all words!\n"
+                    self.output.append(output_string)
+                    other_words -= dpink_words
+                output_string = f"Other words in page {i + 1}: {other_words}\nAnd it's {(other_words*100)/all_words}% of all words!"
+                self.output.append(output_string)
+                remove(f"./wordcount/wordcount_page{i + 1}.docx")
+            rmdir("./wordcount")
         except:
             self.output.append("Path of file is in incorrect\n")
 if __name__ == "__main__":
