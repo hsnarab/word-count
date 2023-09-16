@@ -8,4 +8,5 @@ I have used these libraries for this project:
 - os
 <br>
 TODO:
-- Solving the problem of sending the words at the end of the page to the next page (this problem occurs if the page is filled to the end and there is no place for a new line)
+<br>
+<li> Solving the problem of sending the words at the end of the page to the next page (this problem occurs if the page is filled to the end and there is no place for a new line) </li>
